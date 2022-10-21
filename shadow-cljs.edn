@@ -1,0 +1,8 @@
+;{
+; :id :app
+; :source-paths ["src/cljs"]
+; :deps true
+; :builds {:app {:target :browser
+;                :output-dir "resources/public/js/compiled"
+;                :asset-path "js/compiled"
+;                :modules {:main {:entries [scramblies.core]}}}}}

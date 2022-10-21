@@ -1,0 +1,60 @@
+{:version     "0.1.0"
+ :description "Base deps.edn Project"
+ :url         "https://github.com/damesek/deps-fullstack"
+ :license     {:name "Eclipse Public License - v 2.0"
+               :url  "http://www.eclipse.org/legal/epl-v20.html"}
+ :paths
+ ["src/config"
+  "src/main"
+  "src/resources"]
+
+ :deps
+ {;; server
+  io.pedestal/pedestal.service      {:mvn/version "0.5.10"}
+  io.pedestal/pedestal.route        {:mvn/version "0.5.10"}
+  io.pedestal/pedestal.jetty        {:mvn/version "0.5.10"}
+  io.pedestal/pedestal.log          {:mvn/version "0.5.10"}
+  io.pedestal/pedestal.interceptor  {:mvn/version "0.5.10"}
+  org.clojure/tools.analyzer        {:mvn/version "1.1.0"}
+  hiccup/hiccup                     {:mvn/version "1.0.5"}
+
+  ;; xtdb + rocksdb
+  com.xtdb/xtdb-core                {:mvn/version "1.19.0"}
+  com.xtdb/xtdb-rocksdb             {:mvn/version "1.19.0"}
+
+  ;; xtdb optional:
+  com.xtdb/xtdb-lucene              {:mvn/version "1.19.0"}
+  com.xtdb/xtdb-http-server         {:mvn/version "1.19.0"}
+  org.clojure/tools.logging         {:mvn/version "1.2.4"}
+
+  ;; xtdb dependencies
+  metosin/jsonista                  {:mvn/version "0.2.2"}
+
+  ;; date-to-time
+  tick/tick                         {:mvn/version "0.4.32"}
+  com.widdindustries/cljc.java-time {:mvn/version "0.1.21"}
+
+  ;; lifecycle
+  mount/mount                       {:mvn/version "0.1.16"}}
+
+ :aliases
+ {:dev
+  {:extra-paths
+   ["src/dev"]}
+
+  ;; cljs part: clj -A:shadow-cljs watch app
+  :shadow-cljs
+  {:extra-deps {thheller/shadow-cljs {:mvn/version "2.19.9"}
+                reagent/reagent      {:mvn/version "1.0.0-rc1"}
+                re-frame/re-frame    {:mvn/version "1.1.2"}
+                day8.re-frame/http-fx {:mvn/version "v0.2.0"}}
+   :main-opts ["-m" "shadow.cljs.devtools.cli"]}
+
+  ;; create uberjar
+  :uberdeps {:extra-deps {uberdeps/uberdeps {:mvn/version "1.1.0"}}
+             :main-opts  ["-m" "uberdeps.uberjar"]}
+
+  :tests
+  {:extra-paths ["src/test"]
+   :extra-deps  {lambdaisland/kaocha {:mvn/version "1.70.1086"}}
+   :main-opts   ["-m" "kaocha.runner"]}}}
