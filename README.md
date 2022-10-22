@@ -6,7 +6,7 @@ Some information to here.
 
 <hr style="border:1px solid white">
 
-###Services of Stack 
+### Services of Stack 
 Based on Clojure tools (deps.edn).
 <BR><BR>
 
@@ -62,6 +62,16 @@ https://docs.desmos.network/fullnode/rocksdb-installation/
 make install DB_BACKEND=rocksdb
 sudo apt install librocksdb-dev
 ```
+
+Add to root folder in the .env `XTDB_ENABLE_BYTEUTILS_SHA1="true"`
+OR Edit ~/.zshrc and add the line export XTDB_ENABLE_BYTEUTILS_SHA1=true.
+Check more info at: https://docs.xtdb.com/administration/1.22.0/configuring/ -> Environment Variables
+Important comment: I need to start the repl from terminal (outside of IntelliJ), because that is just 
+a simulated terminal and will not pick up the env in correct way. I talked about with Cursive' dev.
+So, that is the "best practice" at XTDB.
+
+Mac M1 issue: https://github.com/xtdb/xtdb/issues/1518
+`{org.rocksdb/rocksdbjni {:mvn/version "6.29.4.1"}}`
 
 ### Test diagram setup
 
