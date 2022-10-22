@@ -1,0 +1,8 @@
+[{;:id "style"
+                    ;; Source path where to watch for changes:
+                   :source-path "src/main/project/garden/css"
+                   ;; The var containing your stylesheet:
+                   :stylesheet  project.garden.css/screen
+                   ;; Compiler flags passed to `garden.core/css`:
+                   :compiler    {:output-to     "src/resources/public/css/screen.css"
+                                 :pretty-print? true}}]
