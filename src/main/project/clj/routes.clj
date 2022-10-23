@@ -31,10 +31,10 @@
 (defn init-example [_]
   (page {:title "Demo Project"}
         ;[:div
-         ;[:script {:src "https://unpkg.com/tailwindcss-jit-cdn"}]
+         [:script {:src "https://unpkg.com/tailwindcss-jit-cdn"}]
          [:div#app]
          (h/include-js "/js/main.js")
-;         ]
+         ;]
 ))
 
 

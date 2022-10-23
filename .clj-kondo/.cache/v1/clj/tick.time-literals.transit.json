@@ -1,1 +1,0 @@
-["^ ","~$*time-literals-printing*",["^ ","~:row",5,"~:col",1,"~:name","^0","~:ns","~$tick.time-literals","~:top-ns","^5"],"~$modify-printing-of-time-literals-if-enabled!",["^ ","^1",11,"^2",1,"~:macro",true,"~:fixed-arities",["~#set",[0]],"^3","^7","^4","^5","^6","^5"],"~:filename","tick/time_literals.clj"]
