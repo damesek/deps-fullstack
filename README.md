@@ -1,7 +1,7 @@
-## Demo test project
+## Fullstack test skeleton 
 
 <BR><BR>
-Some information to here.
+Project could be test with command `(start)` from user namespace.
 <BR><BR>
 
 <hr style="border:1px solid white">
