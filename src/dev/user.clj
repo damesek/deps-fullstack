@@ -3,11 +3,10 @@
     [clojure.tools.namespace.repl :as ns-tools]
     [io.pedestal.http :as http]
     [clojure.edn :as edn]
-    [garden.core :as garden]
     [mount.core :as mount]
     [re-frame.core :as rf]
-    [project.clj.routes :refer [routes]]
 
+    [project.clj.components.service]
     [frontend]
     [backend]
     ;[xtdb]
@@ -25,13 +24,13 @@
 
 (def start-components [#'backend/css-watcher
                        ;#'app.db/*xtdb*
-                       ;#'backend/dev-http-server
+                       #'project.clj.components.service/http-server
                        #'frontend/shadow-cljs-server
                        #'frontend/cljs-app-watcher])
 
 ; Reset components are stopped and started between code reloading
 
-(def reset-components [;#'backend/dev-http-server
+(def reset-components [#'project.clj.components.service/http-server
                        #'frontend/shadow-cljs-server
                        #'frontend/cljs-app-watcher])
 
@@ -59,30 +58,6 @@
 
 (defonce system-ref (atom nil))
 
-(defn start-dev []
-  (reset! system-ref
-          (-> {::http/routes            routes
-               ::http/type              :jetty
-               ::http/join?             false
-               ::http/host              "0.0.0.0"
-               ::http/resource-path     "/public"
-               ::http/port              3000
-               ::http/secure-headers    {:content-security-policy-settings {:object-src "none"}}
-               ::http/container-options {:h2c? true
-                                         :h2?  false
-                                         :ssl? false}}
-              http/create-server
-              http/start))
-  :started)
-
-(defn stop-dev []
-  (http/stop @system-ref)
-  :stopped)
-
-(defn restart-dev []
-  (stop-dev)
-  (start-dev)
-  :restarted)
 
 (comment
 

@@ -12,10 +12,12 @@
   "src/garden"]
 
  :deps  #_(add-libs)
- {org.clojure/clojure               {:mvn/version "1.11.0"}
+ {;; core
+  org.clojure/clojure               {:mvn/version "1.11.0"}
   org.clojure/tools.namespace       {:mvn/version "1.3.0"}
   ring/ring-core                    {:mvn/version "1.9.5"}
   ring/ring-jetty-adapter           {:mvn/version "1.9.5"}
+  org.clojure/core.async            {:mvn/version "1.5.648"}
   ;; server
   io.pedestal/pedestal.service      {:mvn/version "0.5.10"}
   io.pedestal/pedestal.route        {:mvn/version "0.5.10"}
@@ -47,6 +49,9 @@
   ;; lifecycle
   mount/mount                       {:mvn/version "0.1.16"}
 
+  ;; log
+  com.taoensso/timbre               {:mvn/version "6.0.0-RC1"}
+
   ;; frontend
   thheller/shadow-cljs              {:mvn/version "2.19.9"}
   reagent/reagent                   {:mvn/version "1.0.0-rc1"}
@@ -65,16 +70,16 @@
    :main-opts   ["-e" "(require,'user)"
                  "-e" "(in-ns,'user)"]}
 
- ;; cljs part: clj -A:shadow-cljs watch app
- :shadow-cljs
- {:extra-deps {}
-  :main-opts  ["-m" "shadow.cljs.devtools.cli"]}
+  ;; cljs part: clj -A:shadow-cljs watch app
+  :shadow-cljs
+  {:extra-deps {}
+   :main-opts  ["-m" "shadow.cljs.devtools.cli"]}
 
- ;; create uberjar
- ;:uberdeps {:extra-deps {uberdeps/uberdeps {:mvn/version "1.1.0"}}
- ;          :main-opts  ["-m" "uberdeps.uberjar"]}
+  ;; create uberjar
+  ;:uberdeps {:extra-deps {uberdeps/uberdeps {:mvn/version "1.1.0"}}
+  ;          :main-opts  ["-m" "uberdeps.uberjar"]}
 
- :tests
- {:extra-paths ["src/test"]
-  :extra-deps  {lambdaisland/kaocha {:mvn/version "1.70.1086"}}
-  :main-opts   ["-m" "kaocha.runner"]}} }
+  :tests
+  {:extra-paths ["src/test"]
+   :extra-deps  {lambdaisland/kaocha {:mvn/version "1.70.1086"}}
+   :main-opts   ["-m" "kaocha.runner"]}}}
