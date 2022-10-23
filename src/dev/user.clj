@@ -1,7 +1,6 @@
 (ns user
   (:require
     [clojure.tools.namespace.repl :as ns-tools]
-    [io.pedestal.http :as http]
     [clojure.edn :as edn]
     [mount.core :as mount]
     [re-frame.core :as rf]
@@ -14,17 +13,17 @@
   (:import (java.io File)))
 
 
-(ns-tools/set-refresh-dirs "src/main")
+(ns-tools/set-refresh-dirs "src/")
 
 (def dev-config (-> "src/config/project/dev.edn" slurp edn/read-string))
 
 ; **** Reloaded Workflow ****
-
 ; Start components won't be reloaded on (reset)
 
 (def start-components [#'backend/css-watcher
-                       ;#'app.db/*xtdb*
                        #'project.clj.components.service/http-server
+
+                       ;#'app.db/*xtdb*
                        #'frontend/shadow-cljs-server
                        #'frontend/cljs-app-watcher])
 
@@ -56,18 +55,10 @@
   :ready)
 
 
-(defonce system-ref (atom nil))
-
-
 (comment
 
-  (start-dev)
-
-  (restart-dev)
-
-  (stop-dev)
-
   (start)
+  (stop)
   (re)
 
   )

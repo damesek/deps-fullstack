@@ -33,8 +33,9 @@
   (page {:title "Demo Project"}
         [:div
          [:script {:src "https://unpkg.com/tailwindcss-jit-cdn"}] ; quick dev
-         [:p "init example page"]
-         [:div#app]]))
+         [:div#app [:p "JS loading.."]]
+
+         ]))
 
 
 (def common-interceptors [(body-params/body-params) http/html-body])

@@ -10,5 +10,5 @@
 
 (mount/defstate cljs-app-watcher
                 :start (cljs/watch :app)
-                :stop (cljs/stop-worker :app))
+                :stop  (cljs/stop-worker :app))
 

@@ -1,19 +1,19 @@
 (ns project.cljs.index
   (:require [shadow.dom :as dom]
             [reagent.dom :as rd]
-            [reagent.core :as r]
-            [re-frame.core :as rf]))
+            [project.cljs.routes :refer [Page]]))
 
 
 (enable-console-print!)
 
 ; quick root
 (defn root []
-  [:div
-   [:p "hello"]])
+  [Page])
 
 (defn render []
-  (rd/render [root] (dom/by-id "app")))
+  (rd/render [Page] (dom/by-id "app")))
+
+
 
 (defn ^:dev/after-load reload! []
   (println "(reload!)")

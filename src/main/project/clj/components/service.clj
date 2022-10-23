@@ -5,12 +5,12 @@
             [project.clj.routes :as server-routes]))
 
 
-
+; todo > add logic to prod, just for dev, refactor later
 
 (def service
   {;; do not block thread that starts web server
    ::http/join?             false
-   ::http/port              8080
+   ::http/port              3000
    ::http/host              "0.0.0.0"
    ::http/resource-path     "/public"
    ::http/routes            server-routes/routes
@@ -34,6 +34,7 @@
         http/default-interceptors
         http/dev-interceptors
         http/create-server)))
+
 
 (let [prod? (System/getenv "PROD")]
   (mount/defstate http-server

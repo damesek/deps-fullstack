@@ -1,0 +1,136 @@
+@tailwind base;
+@tailwind components;
+
+.tooltip {
+    @apply invisible absolute;
+}
+
+.has-tooltip:hover .tooltip {
+    @apply visible z-50;
+}
+
+@tailwind utilities;
+
+/* Range Slider */
+
+/* range input styles */
+
+input[type='range'] {
+    -webkit-appearance: none;
+
+    width: 100%;
+    height: 13px;
+    cursor: pointer;
+
+    color: lightgray;
+    background: transparent;
+    margin: 0;
+    padding: 0;
+}
+
+input[type=range]:active, input[type='range']:focus {
+    outline: none;
+}
+
+
+input[type=range] {
+    -webkit-appearance: none;
+
+    cursor: pointer;
+    width: 300px;
+    height: 13px;
+    margin: 0;
+    padding: 0;
+    color: lightgray;
+
+    background: transparent;
+
+}
+input[type=range]:active, input[type=range]:focus {
+    outline: none;
+}
+
+
+input[type='range']::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    width: 13px;
+    height: 13px;
+    margin-top: -6px;
+    border-radius: 50%;
+    border: 0;
+    background: #14618d;
+    cursor: pointer;
+}
+
+input[type='range']::-webkit-slider-runnable-track {
+    width: 100%;
+    height: 2px;
+    background: teal;
+}
+
+input[type='range']::-moz-range-thumb {
+    -moz-appearance: none;
+    width: 13px;
+    height: 13px;
+    margin-top: -6px;
+    border-radius: 50%;
+    border: 0;
+    background: teal;
+    cursor: pointer;
+}
+
+input[type='range']::-moz-range-progress {
+    width: 100%;
+    height: 2px;
+    background: teal;
+}
+input[type='range']::-moz-range-track {
+    width: 100%;
+    height: 1px;
+    background: teal;
+}
+
+
+
+input[type=range]::-webkit-slider-thumb {
+    height: 28px;
+    width: 28px;
+    border-radius: 28px;
+    background-color: #f00;
+    position: relative;
+    margin: 5px 0;
+    cursor: pointer;
+    appearance: none;
+    pointer-events: all;
+    box-shadow: 0 1px 4px 0.5px rgba(0,0,0,0.25);
+}
+
+
+
+input[type='range']::-webkit-slider-runnable-track {
+    width: 100%;
+    height: 2px;
+    background: teal;
+}
+
+input[type='range']::-moz-range-thumb {
+    -moz-appearance: none;
+    width: 13px;
+    height: 13px;
+    margin-top: -6px;
+    border-radius: 50%;
+    border: 0;
+    background: teal;
+    cursor: pointer;
+}
+
+input[type='range']::-moz-range-progress {
+    width: 100%;
+    height: 2px;
+    background: teal;
+}
+input[type='range']::-moz-range-track {
+    width: 100%;
+    height: 1px;
+    background: teal;
+}

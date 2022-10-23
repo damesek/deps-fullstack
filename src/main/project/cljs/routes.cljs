@@ -1,7 +1,6 @@
 (ns project.cljs.routes
   (:require [bidi.bidi :as bidi]
             [pushy.core :as pushy]
-            [project.cljs.routes :as routes]
             [re-frame.core :as rf]))
 
 
@@ -9,27 +8,21 @@
 (defn Overview []
   (let []
     [:div
-     [:> Normalize]
-     [:div      {:style {:width 1545}}                                           ; kill responsibility > later redesign
-      [:h1 "top"]
-      ;;body
-      [:> Box {:style {:padding "0px 20px 20px 20px"}}
-       [:> Row
-        [:p "navigation left"]
+     [:div {:style {:width 1545}}                           ; kill responsibility > later redesign
+      [:h1.text-red-900.text-xl.font-bold.m-10 "Tailwind intergation done"]
 
-        [:p "main content"]
-        ]]]]))
+      [:p.mx-10 "main content"]
+      ]]))
 
 
 (defn Page []
   "here we add the pages to the routes"
   [:div.content
-   (case ::home ;@(rf/subscribe [::nav/active-page])
-     ::routes/home                [Overview]
-     [Overview])])
+   [Overview]
+     ])
 
 
-(def routes ["/app" {""  ::home}])
+(def routes ["" {"" ::home}])
 
 (defn- parse-url [url]
   (bidi/match-route routes url))
@@ -39,7 +32,7 @@
   "handle different dispatch requests,
   when need to dispatch or clear"
   [route-path handler dispatch-key params]
-  (println (str "params handler " route-path " h* "handler " d* "dispatch-key " p* "params))
+  (println (str "params handler " route-path " h* " handler " d* " dispatch-key " p* " params))
   (if (and (= handler route-path) params)
     (doall (println "truuue")
            (rf/dispatch [dispatch-key params]))
@@ -51,8 +44,7 @@
   [matched-route]
 
   (let [handler (js->clj (:handler matched-route))
-        params (:route-params matched-route)]
-    ,,,
+        params (:route-params matched-route)],,,
     ))
 
 (defonce ^:private history
