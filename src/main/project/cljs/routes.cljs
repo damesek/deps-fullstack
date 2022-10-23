@@ -1,9 +1,24 @@
 (ns project.cljs.routes
   (:require [bidi.bidi :as bidi]
+            [re-frame.core :as rf :refer [reg-event-db reg-event-fx path]]
+            [day8.re-frame.tracing :refer-macros [fn-traced]]
             [pushy.core :as pushy]
+            [project.cljs.db :as db]
             [re-frame.core :as rf]))
 
 
+(def initial-db db/initial-app-db)
+(def nav-interceptors [(path :nav)])
+
+(reg-event-db ::set-active-page
+              (fn-traced [db [_ {:keys [handler route-params]}]]
+                         (println "handler >> " handler route-params)
+                         (assoc db ::active-page [handler route-params])))
+
+(rf/reg-sub
+  ::active-page
+  (fn [db _]
+    (-> db ::active-page first)))
 
 (defn Overview []
   (let []
@@ -18,11 +33,14 @@
 (defn Page []
   "here we add the pages to the routes"
   [:div.content
-   [Overview]
+    [Overview]
+   #_(case @(rf/subscribe [::active-page])
+     ::home [Overview]
+     [Overview])
      ])
 
 
-(def routes ["" {"" ::home}])
+(def routes ["/app" {"" ::home}])
 
 (defn- parse-url [url]
   (bidi/match-route routes url))
@@ -44,7 +62,10 @@
   [matched-route]
 
   (let [handler (js->clj (:handler matched-route))
-        params (:route-params matched-route)],,,
+        params (:route-params matched-route)]
+    (rf/dispatch [::set-active-page {:handler (:handler matched-route)
+                                                :route-params params}])
+
     ))
 
 (defonce ^:private history

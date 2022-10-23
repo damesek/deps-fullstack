@@ -13,7 +13,7 @@
   (:import (java.io File)))
 
 
-(ns-tools/set-refresh-dirs "src/")
+(ns-tools/set-refresh-dirs "src/main/")
 
 (def dev-config (-> "src/config/project/dev.edn" slurp edn/read-string))
 
@@ -55,10 +55,10 @@
   :ready)
 
 
-(comment
-
-  (start)
-  (stop)
-  (re)
-
-  )
+;(comment
+;
+;  (start)
+;  (stop)
+;  (re)
+;
+;  )

@@ -5,7 +5,7 @@
                 :output-dir "src/resources/public/js"
                 :asset-path "/js"
 
-                :modules {:main {:entries [project.cljs.index]}}
+                :modules {:main {:entries [project.cljs.main]}}
 
                 :compiler-options {:external-config {:devtools/config {:features-to-install    [:formatters :hints]
                                                                        :fn-symbol              "F"
@@ -15,6 +15,6 @@
                                                      day8.re-frame.tracing/trace-enabled? true}}
                 :devtools   {:watch-dir    "src/resources/public"
                              :preloads    [day8.re-frame-10x.preload]
-                             :after-load   project.cljs.index/reload!
-                             :repl-init-ns project.cljs.index}
+                             :after-load   project.cljs.main/reload!
+                             :repl-init-ns project.cljs.main}
                 }}}

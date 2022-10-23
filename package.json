@@ -8,7 +8,7 @@
   },
   "author": "SB",
   "license": "Rights to SB",
-  "main": "index.js",
+  "main": "main.js",
   "scripts": {
     "shadow:watch": "shadow-cljs watch app",
     "shadow:compile": "shadow-cljs compile app",
