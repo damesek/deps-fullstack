@@ -4,6 +4,7 @@
             [day8.re-frame.tracing :refer-macros [fn-traced]]
             [pushy.core :as pushy]
             [project.cljs.db :as db]
+            [project.cljs.views.dashboard :refer [dash]]
             [re-frame.core :as rf]))
 
 
@@ -23,11 +24,8 @@
 (defn Overview []
   (let []
     [:div
-     [:div {:style {:width 1545}}                           ; kill responsibility > later redesign
-      [:h1.text-red-900.text-xl.font-bold.m-10 "Tailwind intergation done"]
-
-      [:p.mx-10 "main content"]
-      ]]))
+      [dash]
+      ]))
 
 
 (defn Page []
