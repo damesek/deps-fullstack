@@ -3,9 +3,7 @@
             [xtdb.api :as xt])
   (:import [xtdb.api IXtdb XtdbDocument]
            [xtdb.api.tx Transaction]
-           [xtdb.node XtdbNode]
-           java.time.Duration
-           [java.util Date HashMap Map UUID]))
+           [java.util Date]))
 
 
 (defn xt-person
@@ -58,48 +56,49 @@
                                     (.put (XtdbDocument/factory (first docs)) valid-time)
                                     (.build)))]
     (.awaitTx *db* submitted-tx nil)))
+;
+;(comment
+;
+;  (let [person-id (str "pers--" (java.util.UUID/randomUUID))
+;        p (person)
+;        import-d  [{:xt/id       person-id
+;                     :pe/uid         (keyword person-id)
+;                     :pe/name        (str (if (= (:sex p) :male) "Mr" "Mrs") " "
+;                                          (:first-name p) " "
+;                                          (:last-name p))
+;                     :pe/username    (:username p)
+;                     :pe/id          (str (:username p) "@some.email")
+;                     :pe/address     (-> p :address)
+;                     :pe/a-state     (-> p :address :city)
+;                     :pe/a-street    (-> p :address :street)
+;                     :pe/a-street-nr (-> p :address :street-number)
+;                     :pe/a-postcode  (-> p :address :postal-code)
+;                     :pe/gender      (:sex p)
+;                     :pe/birthdate   (str (:birth-date p))
+;                     :pe/photo       (:picture-url p)}]
+;        submitted-tx (import-docs->JXtdbNode project.clj.components.db/*xtdb* import-d)]
+;    (.awaitTx project.clj.components.db/*xtdb* submitted-tx nil)
+;
+;    (.query (.db project.clj.components.db/*xtdb*)
+;            '{:find [id name?]
+;              :where [[id :xt/id]
+;                      [id :pe/name name?]]}
+;            (object-array 0))
+;
+;    )
+;
+;  (defn persons-init-db
+;    "Import 50 persons into database.
+;    - core data
+;    - two contact data [email, phone]
+;    (import-practitioner-init-db *xtdb*)"
+;    [*db*]
+;    (for [i (into [] (range 50))]
+;      (do
+;        (import-docs {:db *db* :docs (xt-person)})
+;        (xt/sync *db*))))
+;
+;  )
 
-(comment
-
-  (let [person-id (str "pers--" (java.util.UUID/randomUUID))
-        p (person)
-        import-d  [{:xt/id       person-id
-                     :pe/uid         (keyword person-id)
-                     :pe/name        (str (if (= (:sex p) :male) "Mr" "Mrs") " "
-                                          (:first-name p) " "
-                                          (:last-name p))
-                     :pe/username    (:username p)
-                     :pe/id          (str (:username p) "@some.email")
-                     :pe/address     (-> p :address)
-                     :pe/a-state     (-> p :address :city)
-                     :pe/a-street    (-> p :address :street)
-                     :pe/a-street-nr (-> p :address :street-number)
-                     :pe/a-postcode  (-> p :address :postal-code)
-                     :pe/gender      (:sex p)
-                     :pe/birthdate   (str (:birth-date p))
-                     :pe/photo       (:picture-url p)}]
-        submitted-tx (import-docs->JXtdbNode project.clj.components.db/*xtdb* import-d)]
-    (.awaitTx project.clj.components.db/*xtdb* submitted-tx nil)
-
-    (.query (.db project.clj.components.db/*xtdb*)
-            '{:find [id name?]
-              :where [[id :xt/id]
-                      [id :pe/name name?]]}
-            (object-array 0))
-
-    )
-
-  )
-
-(defn persons-init-db
-  "Import 50 persons into database.
-  - core data
-  - two contact data [email, phone]
-  (import-practitioner-init-db *xtdb*)"
-  [*db*]
-  (for [i (into [] (range 50))]
-    (do
-      (import-docs {:db *db* :docs (xt-person)})
-      (xt/sync *db*))))
 
 

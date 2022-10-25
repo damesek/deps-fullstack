@@ -3,7 +3,7 @@
     [clojure.tools.namespace.repl :as ns-tools]
     [mount.core :as mount]
     [re-frame.core :as rf]
-    [project.clj.db.persons :refer [persons-init-db]]
+    ;[project.clj.db.persons :refer [persons-init-db]]
     [project.clj.components.service :refer [http-server]]
     [project.clj.components.config :refer [conf]]
     [frontend :refer [shadow-cljs-server cljs-app-watcher]]
@@ -73,6 +73,6 @@
   ;  (mount/running-states)
 
   ; run just once:
-   (persons-init-db *xtdb*)
-  (project.clj.db.persons/import-docs {:db *xtdb* :docs (project.clj.db.persons/xt-person)})
+   ;(persons-init-db *xtdb*)
+  ;(project.clj.db.persons/import-docs {:db *xtdb* :docs (project.clj.db.persons/xt-person)})
   )
