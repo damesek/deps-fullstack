@@ -67,7 +67,8 @@
  :aliases
  {:dev
   {:extra-paths ["src/dev" "src/garden"]
-   :extra-deps  {garden-gnome/garden-gnome {:mvn/version "0.1.0"}}
+   :extra-deps  {garden-gnome/garden-gnome {:mvn/version "0.1.0"}
+                 talltale/talltale {:mvn/version "0.5.13"}}
    :main-opts   ["-e" "(require,'user)"
                  "-e" "(in-ns,'user)"]}
 
@@ -82,5 +83,6 @@
 
   :tests
   {:extra-paths ["src/test"]
-   :extra-deps  {lambdaisland/kaocha {:mvn/version "1.70.1086"}}
+   :extra-deps  {lambdaisland/kaocha {:mvn/version "1.70.1086"}
+                 talltale/talltale {:mvn/version "0.5.13"}}
    :main-opts   ["-m" "kaocha.runner"]}}}

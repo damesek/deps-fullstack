@@ -20,6 +20,8 @@
 
 (env-print)
 
+(def closed? (atom "false"))
+
 (defn kv-store [dir]
   {:kv-store {:xtdb/module 'xtdb.rocksdb/->kv-store
               :db-dir      (io/file dir)

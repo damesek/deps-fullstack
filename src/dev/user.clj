@@ -3,7 +3,7 @@
     [clojure.tools.namespace.repl :as ns-tools]
     [mount.core :as mount]
     [re-frame.core :as rf]
-
+    [project.clj.db.persons :refer [persons-init-db]]
     [project.clj.components.service :refer [http-server]]
     [project.clj.components.config :refer [conf]]
     [frontend :refer [shadow-cljs-server cljs-app-watcher]]
@@ -51,33 +51,28 @@
   :stop-done)
 
 
-(defn re []
+(defn re []                                                 ;<- re-mount the things
   (stop)
   (rf/clear-subscription-cache!)
   (ns-tools/refresh :after 'user/restart)
   :ready)
 
 
-(defn stop-all [] ; <-- just for tests
+(defn stop-all []                                           ; <-- just for tests
   (doseq [compoments (:stopped (mount/stop start-components))]
     (Thread/sleep 500)
     (println compoments " stopped"))
   :stop-all-done)
 
 
-;(comment
-;
-;  (start)
-;  (stop)
-;  (re)
-; (mount/running-states)
+(comment
+  ;
+  ;  (start)
+  ;  (stop-all)
+  ;  (re)
+  ;  (mount/running-states)
 
-; old fn for reload
-; (defn re []
-;  (rf/clear-subscription-cache!)
-;  (stop)
-;  (doseq [compoments (:started (mount/start reset-components))]
-;    (println compoments " started"))
-;  :ready)
-
-;  )
+  ; run just once:
+   (persons-init-db *xtdb*)
+  (project.clj.db.persons/import-docs {:db *xtdb* :docs (project.clj.db.persons/xt-person)})
+  )
