@@ -8,9 +8,7 @@
     [project.clj.components.config :refer [conf]]
     [frontend :refer [shadow-cljs-server cljs-app-watcher]]
     [backend :refer [css-watcher]]
-
-    ;[xtdb]
-    ))
+    [project.clj.components.db :refer [*xtdb*]]))
 
 
 (ns-tools/set-refresh-dirs "src/main/")
@@ -21,8 +19,7 @@
 
 (def start-components [#'css-watcher
                        #'http-server
-
-                       ;#'app.db/*xtdb*
+                       #'*xtdb*
                        #'shadow-cljs-server
                        #'cljs-app-watcher
                        #'conf])

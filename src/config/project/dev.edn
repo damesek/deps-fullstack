@@ -1,14 +1,14 @@
 {:dev?   true
- :server {:dev  {:io.pedestal.http/join?  false
-                 :io.pedestal.http/port                     3000
+ :server {:dev  {:io.pedestal.http/join?             false
+                 :io.pedestal.http/port              3000
                  :io.pedestal.http/host              "0.0.0.0"
                  :io.pedestal.http/resource-path     "/public"
                  :io.pedestal.http/type              :jetty
                  ;; <- for dev only
                  :io.pedestal.http/secure-headers    {:content-security-policy-settings {:object-src "none"}}
                  :io.pedestal.http/container-options {:h2c? true
-                                           :h2?  false
-                                           :ssl? false}}
+                                                      :h2?  false
+                                                      :ssl? false}}
           :prod {:io.pedestal.http/join?             false
                  :io.pedestal.http/port              3000
                  :io.pedestal.http/host              "0.0.0.0"
@@ -17,6 +17,15 @@
 
                  ;; todo add prod things here
                  :io.pedestal.http/container-options {:h2c? true
-                                           :h2?  false
-                                           :ssl? false}}}
+                                                      :h2?  false
+                                                      :ssl? false}}}
+ :xtdb   {:xtdb/tx-log              (kv-store "data/dev/tx-log")
+          :xtdb/document-store      (kv-store "data/dev/doc-store")
+          :xtdb/index-store         (kv-store "data/dev/index-store")
+          ;; Configuring the Block Cache https://docs.xtdb.com/storage/1.20.0/rocksdb/
+          :xtdb.rocksdb/block-cache {:xtdb/module 'xtdb.rocksdb/->lru-block-cache
+                                     :cache-size  (* 512 1024 1024)}
+          ;; optional:
+          :xtdb.lucene/lucene-store {:db-dir "data/dev/lucene-dir"}
+          :xtdb.http-server/server  {:port 9999}}
  }
