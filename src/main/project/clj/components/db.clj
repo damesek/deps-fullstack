@@ -12,7 +12,8 @@
 
 (declare ^:dynamic ^IXtdb *xtdb*)
 
-; todo fix env var reads, something bug here (with lein works)
+; todo fix env var reads, something bug here (with lein works..)
+
 (defn env-print []
   (println (System/getenv "XTDB_ENABLE_BYTEUTILS_SHA1")
            (System/getenv "MALLOC_ARENA_MAX")))
@@ -26,28 +27,22 @@
               :sync?       true}})
 
 
+; todo later refactor :dev :product maybe with areo edn reading?
 
 (defn start-xtdb! [conf]
   ^IXtdb (IXtdb/startNode
-           (let [^Map m {:xtdb/tx-log              (kv-store "data/dev/tx-log")
-                         :xtdb/document-store      (kv-store "data/dev/doc-store")
-                         :xtdb/index-store         (kv-store "data/dev/index-store")
+           (let [xtdb-path (-> conf :xtdb :dev :dir)
+                 xtdb-port (-> conf :xtdb :dev :port)
+                 ^Map m {:xtdb/tx-log              (kv-store (str xtdb-path "/tx-log"))
+                         :xtdb/document-store      (kv-store (str xtdb-path "/doc-store"))
+                         :xtdb/index-store         (kv-store (str xtdb-path "/index-store"))
                          ;; Configuring the Block Cache https://docs.xtdb.com/storage/1.20.0/rocksdb/
                          :xtdb.rocksdb/block-cache {:xtdb/module 'xtdb.rocksdb/->lru-block-cache
                                                     :cache-size  (* 512 1024 1024)}
                          ;; optional:
-                         :xtdb.lucene/lucene-store {:db-dir "data/dev/lucene-dir"}
-                         :xtdb.http-server/server  {:port 9999}}]
+                         :xtdb.lucene/lucene-store {:db-dir (str xtdb-path "/lucene-dir")}
+                         :xtdb.http-server/server  {:port xtdb-port}}]
              m)))
-
-
-
-(defn with-xt [f]
-  (with-open [node (start-xtdb!)]
-    (binding [*xtdb* node]
-      (f))))
-
-
 
 ; rocksdb bug https://www.tabnine.com/code/java/methods/org.rocksdb.RocksDB/close
 ; if that is fail, then full re-start needed ...
@@ -79,7 +74,9 @@
   ; (dval *xtdb*)
   ; (type *xtdb*)
 
-  (.status *xtdb*)
+   (.status *xtdb*)
+
+
 
 
   )

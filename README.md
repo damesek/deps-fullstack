@@ -2,6 +2,9 @@
 
 <BR><BR>
 Project could be test with command `(start)` from user namespace.
+
+[ps. don't forget to add to root `data/dev` folder or 
+configure your - XTDB's Rocksdb - path]
 <BR><BR>
 
 <hr style="border:1px solid white">
@@ -40,6 +43,7 @@ UML extensions:
 ### Installation
 
 Rocksdb Installation on Ubuntu 18.04
+
 
 ```shell
 sudo apt install liblz4-dev

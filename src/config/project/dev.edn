@@ -19,13 +19,6 @@
                  :io.pedestal.http/container-options {:h2c? true
                                                       :h2?  false
                                                       :ssl? false}}}
- :xtdb   {:xtdb/tx-log              (kv-store "data/dev/tx-log")
-          :xtdb/document-store      (kv-store "data/dev/doc-store")
-          :xtdb/index-store         (kv-store "data/dev/index-store")
-          ;; Configuring the Block Cache https://docs.xtdb.com/storage/1.20.0/rocksdb/
-          :xtdb.rocksdb/block-cache {:xtdb/module 'xtdb.rocksdb/->lru-block-cache
-                                     :cache-size  (* 512 1024 1024)}
-          ;; optional:
-          :xtdb.lucene/lucene-store {:db-dir "data/dev/lucene-dir"}
-          :xtdb.http-server/server  {:port 9999}}
+ :xtdb   {:dev {:dir "data/dev"
+                :port  9999}}
  }
