@@ -8,8 +8,6 @@
             [project.clj.routes :as server-routes]))
 
 
-; todo > add logic to prod, just for dev, refactor later
-
 
 ;; preparation for inject/ mod request
 
@@ -60,10 +58,11 @@
         http/create-server)))
 
 
-(let [prod? (System/getenv "PROD")]
-  (mount/defstate http-server
-                  :start (http/start (http-server-service conf))
-                  :stop (http/stop http-server)))
+; (def prod? (System/getenv "PROD"))
+
+(mount/defstate http-server
+                :start (http/start (http-server-service conf))
+                :stop (http/stop http-server))
 
 
 
