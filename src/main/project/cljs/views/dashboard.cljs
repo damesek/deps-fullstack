@@ -65,30 +65,7 @@
     [:button.border-r.border-gray-200.px-4.text-gray-500.focus:outline-none.focus:ring-2.focus:ring-inset.focus:ring-indigo-500.md:hidden {:type "button"}
      [:span.sr-only "Open sidebar"]
      [:svg.h-6.w-6 {:xmlns "http://www.w3.org/2000/svg" :fill "none" :viewBox "0 0 24 24" :stroke-width "1.5" :stroke "currentColor" :aria-hidden "true"}
-      [:path {:stroke-linecap "round" :stroke-linejoin "round" :d "M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25H12"}]]]
-    #_[:div.flex.flex-1.justify-between.px-4.md:px-0
-     [:div.flex.flex-1
-      [:form.flex.w-full.md:ml-0 {:action "#" :method "GET"}
-       [:label.sr-only {:for "search-field"} "Search"]
-       [:div.relative.w-full.text-gray-400.focus-within:text-gray-600
-        [:div.pointer-events-none.absolute.inset-y-0.left-0.flex.items-center
-         [:svg.h-5.w-5 {:xmlns "http://www.w3.org/2000/svg" :viewBox "0 0 20 20" :fill "currentColor" :aria-hidden "true"}
-          [:path {:fill-rule "evenodd" :d "M9 3.5a5.5 5.5 0 100 11 5.5 5.5 0 000-11zM2 9a7 7 0 1112.452 4.391l3.328 3.329a.75.75 0 11-1.06 1.06l-3.329-3.328A7 7 0 012 9z" :clip-rule "evenodd"}]]]
-        [:input#search-field.block.h-full.w-full.border-transparent.py-2.pl-8.pr-3.text-gray-900.placeholder-gray-500.focus:border-transparent.focus:placeholder-gray-400.focus:outline-none.focus:ring-0.sm:text-sm {:placeholder "Search" :type "search" :name "search"}]]]]
-     [:div.ml-4.flex.items-center.md:ml-6
-      [:button.rounded-full.bg-white.p-1.text-gray-400.hover:text-gray-500.focus:outline-none.focus:ring-2.focus:ring-indigo-500.focus:ring-offset-2 {:type "button"}
-       [:span.sr-only "View notifications"]
-       [:svg.h-6.w-6 {:xmlns "http://www.w3.org/2000/svg" :fill "none" :viewBox "0 0 24 24" :stroke-width "1.5" :stroke "currentColor" :aria-hidden "true"}
-        [:path {:stroke-linecap "round" :stroke-linejoin "round" :d "M14.857 17.082a23.848 23.848 0 005.454-1.31A8.967 8.967 0 0118 9.75v-.7V9A6 6 0 006 9v.75a8.967 8.967 0 01-2.312 6.022c1.733.64 3.56 1.085 5.455 1.31m5.714 0a24.255 24.255 0 01-5.714 0m5.714 0a3 3 0 11-5.714 0"}]]]
-      [:div.relative.ml-3
-       [:div
-        [:button#user-menu-button.flex.max-w-xs.items-center.rounded-full.text-sm.focus:outline-none.focus:ring-2.focus:ring-indigo-500.focus:ring-offset-2 {:type "button" :aria-expanded "false" :aria-haspopup "true"}
-         [:span.sr-only "Open user menu"]
-         [:img.h-8.w-8.rounded-full {:src "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80" :alt ""}]]]
-       #_[:div.absolute.right-0.z-10.mt-2.w-48.origin-top-right.rounded-md.bg-white.py-1.shadow-lg.ring-1.ring-black.ring-opacity-5.focus:outline-none {:role "menu" :aria-orientation "vertical" :aria-labelledby "user-menu-button" :tabindex "-1"}
-        [:a#user-menu-item-0.block.py-2.px-4.text-sm.text-gray-700 {:href "#" :role "menuitem" :tabindex "-1"} "Your Profile"]
-        [:a#user-menu-item-1.block.py-2.px-4.text-sm.text-gray-700 {:href "#" :role "menuitem" :tabindex "-1"} "Settings"]
-        [:a#user-menu-item-2.block.py-2.px-4.text-sm.text-gray-700 {:href "#" :role "menuitem" :tabindex "-1"} "Sign out"]]]]]]
+      [:path {:stroke-linecap "round" :stroke-linejoin "round" :d "M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25H12"}]]]]
    [:main.flex-1
     [:div.py-6
      [:div.px-4.sm:px-6.md:px-0

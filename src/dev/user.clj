@@ -1,37 +1,37 @@
 (ns user
   (:require
     [clojure.tools.namespace.repl :as ns-tools]
-    [clojure.edn :as edn]
     [mount.core :as mount]
     [re-frame.core :as rf]
 
-    [project.clj.components.service]
-    [frontend]
-    [backend]
+    [project.clj.components.service :refer [http-server]]
+    [project.clj.components.config :refer [conf]]
+    [frontend :refer [shadow-cljs-server cljs-app-watcher]]
+    [backend :refer [css-watcher]]
+
     ;[xtdb]
-    )
-  (:import (java.io File)))
+    ))
 
 
 (ns-tools/set-refresh-dirs "src/main/")
 
-(def dev-config (-> "src/config/project/dev.edn" slurp edn/read-string))
 
 ; **** Reloaded Workflow ****
 ; Start components won't be reloaded on (reset)
 
-(def start-components [#'backend/css-watcher
-                       #'project.clj.components.service/http-server
+(def start-components [#'css-watcher
+                       #'http-server
 
                        ;#'app.db/*xtdb*
-                       #'frontend/shadow-cljs-server
-                       #'frontend/cljs-app-watcher])
+                       #'shadow-cljs-server
+                       #'cljs-app-watcher
+                       #'conf])
 
 ; Reset components are stopped and started between code reloading
 
-(def reset-components [#'project.clj.components.service/http-server
-                       #'frontend/shadow-cljs-server
-                       #'frontend/cljs-app-watcher])
+(def reset-components [#'http-server
+                       #'shadow-cljs-server
+                       #'cljs-app-watcher])
 
 
 ; State management
@@ -42,17 +42,30 @@
     (println compoments " started"))
   :ready)
 
-(defn stop []
-  (doseq [compoments (:stopped (mount/stop reset-components))]
-    (Thread/sleep 500)
-    (println compoments " stopped")))
-
-(defn re []
-  (rf/clear-subscription-cache!)
-  (stop)
+(defn restart []
   (doseq [compoments (:started (mount/start reset-components))]
     (println compoments " started"))
   :ready)
+
+(defn stop []
+  (doseq [compoments (:stopped (mount/stop reset-components))]
+    (Thread/sleep 500)
+    (println compoments " stopped"))
+  :stop-done)
+
+
+(defn re []
+  (stop)
+  (rf/clear-subscription-cache!)
+  (ns-tools/refresh :after 'user/restart)
+  :ready)
+
+
+(defn stop-all [] ; <-- just for tests
+  (doseq [compoments (:stopped (mount/stop start-components))]
+    (Thread/sleep 500)
+    (println compoments " stopped"))
+  :stop-all-done)
 
 
 ;(comment
@@ -60,5 +73,14 @@
 ;  (start)
 ;  (stop)
 ;  (re)
-;
+; (mount/running-states)
+
+; old fn for reload
+; (defn re []
+;  (rf/clear-subscription-cache!)
+;  (stop)
+;  (doseq [compoments (:started (mount/start reset-components))]
+;    (println compoments " started"))
+;  :ready)
+
 ;  )
