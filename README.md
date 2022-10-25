@@ -1,4 +1,4 @@
-## Fullstack test skeleton 
+## Full stack test skeleton 
 
 <BR><BR>
 Project could be test with command `(start)` from user namespace.
