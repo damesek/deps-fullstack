@@ -1,0 +1,4 @@
+#!/usr/bin/env bash
+
+. secrets.env
+clojure -J-Xmx512m -M:dev:test --config-file tests.edn "$@"

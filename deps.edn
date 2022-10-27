@@ -29,6 +29,7 @@
   ;; html + css server
   hiccup/hiccup                     {:mvn/version "1.0.5"}
   garden/garden                     {:mvn/version "1.3.10"}
+  garden-gnome/garden-gnome         {:mvn/version "0.1.0"}
 
   ;; xtdb + rocksdb
   com.xtdb/xtdb-core                {:mvn/version "1.22.0"}
@@ -68,7 +69,7 @@
  {:dev
   {:extra-paths ["src/dev" "src/garden"]
    :extra-deps  {garden-gnome/garden-gnome {:mvn/version "0.1.0"}
-                 talltale/talltale {:mvn/version "0.5.13"}}
+                 talltale/talltale         {:mvn/version "0.5.13"}}
    :main-opts   ["-e" "(require,'user)"
                  "-e" "(in-ns,'user)"]}
 
@@ -83,6 +84,7 @@
 
   :tests
   {:extra-paths ["src/test"]
-   :extra-deps  {lambdaisland/kaocha {:mvn/version "1.70.1086"}
-                 talltale/talltale {:mvn/version "0.5.13"}}
+   :extra-deps  {lambdaisland/kaocha       {:mvn/version "1.70.1086"}
+                 garden-gnome/garden-gnome {:mvn/version "0.1.0"}
+                 talltale/talltale         {:mvn/version "0.5.13"}}
    :main-opts   ["-m" "kaocha.runner"]}}}

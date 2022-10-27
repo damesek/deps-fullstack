@@ -1,7 +1,5 @@
 (ns backend
-  (:require [io.pedestal.http :as http]
-            [mount.core :as mount]
-    ;[app.http-server :as http-server]
+  (:require [mount.core :as mount]
             [garden-gnome.watcher :as garden-gnome]))
 
 
@@ -19,11 +17,11 @@
   ;; csak az utana levo config,
   ;; viszont azt [] vectorba kell hagyni, ne map legyen
 
-
-  (let [gg (garden-gnome/default-config)]
-    (garden-gnome/start! gg))
-
-  (mount/start #'css-watcher)
-  (mount/stop  #'css-watcher)
+  ;
+  ;(let [gg (garden-gnome/default-config)]
+  ;  (garden-gnome/start! gg))
+  ;
+  ;(mount/start #'css-watcher)
+  ;(mount/stop  #'css-watcher)
 
   )

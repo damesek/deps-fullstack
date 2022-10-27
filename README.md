@@ -25,7 +25,7 @@ Based on Clojure tools (deps.edn).
 |   **Routing/ Interceptors** 	|  _Pedestal_ 	|
 |   **Frontend** 	|  _Shadow-cljs + Tailwind CSS_	|
 |   **Generate jar** 	|  _Uberdeps_ 	|
-|   **Test runner** 	|  _Koacha_ 	|
+|   **Test runner** 	|  _Kaocha_ 	|
 <BR>
 
 What is contains:
