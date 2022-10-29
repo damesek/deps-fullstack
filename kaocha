@@ -9,4 +9,4 @@ function help:secrets-missing() {
 }
 
 [ -f secrets.env ] && . secrets.env || (help:secrets-missing >&2 && exit 1)
-clojure -J-Xmx512m -M:dev:test "$@"
+clojure -J-Xmx512m -M:test "$@"
