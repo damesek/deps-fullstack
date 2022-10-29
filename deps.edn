@@ -82,9 +82,10 @@
   ;:uberdeps {:extra-deps {uberdeps/uberdeps {:mvn/version "1.1.0"}}
   ;          :main-opts  ["-m" "uberdeps.uberjar"]}
 
-  :tests
+  :test
   {:extra-paths ["src/test"]
+   :main-opts   ["-m" "kaocha.runner"]
+   :jvm-opts    ["-Xmx512m"]
    :extra-deps  {lambdaisland/kaocha       {:mvn/version "1.70.1086"}
                  garden-gnome/garden-gnome {:mvn/version "0.1.0"}
-                 talltale/talltale         {:mvn/version "0.5.13"}}
-   :main-opts   ["-m" "kaocha.runner"]}}}
+                 talltale/talltale         {:mvn/version "0.5.13"}}}}}
