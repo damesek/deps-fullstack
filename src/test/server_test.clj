@@ -1,24 +1,50 @@
 (ns server-test
-  (:require [clojure.test :refer :all]))
+    (:require
+      [clojure.test :refer :all]
+      [io.pedestal.test :refer :all]
+      [project.clj.components.service :refer [service-config]]
+      [project.clj.components.config :refer [conf]]))
 
 
-(defn capitalize-entries
-  "Returns a new map with values for keys 'ks' in the map 'm' capitalized."
-  [m & ks]
-  (reduce (fn [m k] (update-in m [k] clojure.string/capitalize)) m ks))
 
 
-(deftest test-capitalize-entries
-  (let [employee {:last-name "smith"
-                  :job-title "engineer"
-                  :level 5
-                  :office "seattle"}]
-    ;; Passes
-    (is (= (capitalize-entries employee :job-title :last-name)
-           {:job-title "Engineer"
-            :last-name "Smith"
-            :office "seattle"
-            :level 5}))
-    ;; Fails
-    (is (= (capitalize-entries employee :office)
-           {}))))
+(def service
+  (:io.pedestal.http/service-fn
+    (io.pedestal.http/create-servlet (service-config conf))))
+
+
+
+(deftest test-pedestal-router-healthy
+         (is (= "healthy"
+                (:body (response-for service :get "/health")))))
+
+
+
+
+
+
+(comment
+  ;(defn capitalize-entries
+  ;      "Returns a new map with values for keys 'ks' in the map 'm' capitalized."
+  ;      [m & ks]
+  ;      (reduce (fn [m k] (update-in m [k] clojure.string/capitalize)) m ks))
+  ;
+  ;
+  ;(deftest test-capitalize-entries
+  ;         (let [employee {:last-name "smith"
+  ;                         :job-title "engineer"
+  ;                         :level     5
+  ;                         :office    "seattle"}]
+  ;              ;; Passes
+  ;              (is (= (capitalize-entries employee :job-title :last-name)
+  ;                     {:job-title "Engineer"
+  ;                      :last-name "Smith"
+  ;                      :office    "seattle"
+  ;                      :level     5}))
+  ;              ;; Fails
+  ;              (is (= (capitalize-entries employee :office)
+  ;                     {:last-name "smith"
+  ;                      :job-title "engineer"
+  ;                      :office    "Seattle"
+  ;                      :level     5}))))
+  )
