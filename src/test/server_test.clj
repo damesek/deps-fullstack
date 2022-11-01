@@ -1,22 +1,10 @@
 (ns server-test
     (:require
-      [clojure.test :refer :all]
+      [clojure.test :refer [deftest is use-fixtures]]
       [io.pedestal.test :refer :all]
+      [mount.core :as mount]
       [project.clj.components.service :refer [service-config]]
       [project.clj.components.config :refer [conf]]))
-
-
-
-
-(def service
-  (:io.pedestal.http/service-fn
-    (io.pedestal.http/create-servlet (service-config conf))))
-
-
-
-(deftest test-pedestal-router-healthy
-         (is (= "healthy"
-                (:body (response-for service :get "/health")))))
 
 
 
@@ -24,27 +12,23 @@
 
 
 (comment
-  ;(defn capitalize-entries
-  ;      "Returns a new map with values for keys 'ks' in the map 'm' capitalized."
-  ;      [m & ks]
-  ;      (reduce (fn [m k] (update-in m [k] clojure.string/capitalize)) m ks))
+
+  ;; here we can use a test server fixture too, that is now the real server
+  ;; ideal to pre-test to real-production
+
+  ;(defn start-server-before-all-tests
+  ;      [test-fn]
+  ;      (mount/start)
+  ;      (test-fn)
+  ;      (mount/stop))
+
+  ;(clojure.test/use-fixtures :once start-server-before-all-tests)
   ;
-  ;
-  ;(deftest test-capitalize-entries
-  ;         (let [employee {:last-name "smith"
-  ;                         :job-title "engineer"
-  ;                         :level     5
-  ;                         :office    "seattle"}]
-  ;              ;; Passes
-  ;              (is (= (capitalize-entries employee :job-title :last-name)
-  ;                     {:job-title "Engineer"
-  ;                      :last-name "Smith"
-  ;                      :office    "seattle"
-  ;                      :level     5}))
-  ;              ;; Fails
-  ;              (is (= (capitalize-entries employee :office)
-  ;                     {:last-name "smith"
-  ;                      :job-title "engineer"
-  ;                      :office    "Seattle"
-  ;                      :level     5}))))
+
+  ;(deftest test-pedestal-router-healty-via-mount
+  ;         (is (= "healthy"
+  ;                "not2"                                    ;; get fn clj-http?
+  ;                )))
+
+
   )

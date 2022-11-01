@@ -23,7 +23,7 @@
 (def closed? (atom "false"))
 
 (defn kv-store [dir]
-  {:kv-store {:xtdb/module 'xtdb.rocksdb/->kv-store
+  {:kv-store {:xtdb/module `xtdb.rocksdb/->kv-store
               :db-dir      (io/file dir)
               :block-cache :xtdb.rocksdb/block-cache
               :sync?       true}})
