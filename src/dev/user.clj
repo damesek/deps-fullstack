@@ -64,9 +64,19 @@
     (println compoments " stopped"))
   :stop-all-done)
 
+; (mount/start-with-args {:mode :dev} [#'*xtdb* #'conf])
 
 (comment
-  ;
+
+
+  (mount/start-with-args {:mode :prod}  [#'conf #'*xtdb*])
+
+  (mount/running-states)
+  (mount/stop *xtdb*)
+  (.close *xtdb*)
+  (instance? java.io.Closeable *xtdb*)
+
+
   ;  (start)
   ;  (stop-all)
   ;  (re)
