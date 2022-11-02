@@ -20,7 +20,7 @@
 
 (env-print)
 
-(def closed? (atom "false"))
+(def closed? (atom "true"))
 
 (defn kv-store [dir]
   {:kv-store {:xtdb/module `xtdb.rocksdb/->kv-store
@@ -31,20 +31,22 @@
 
 ; todo later refactor :dev :product maybe with areo edn reading?
 
+(defn rocks-node-opts [conf]
+  (let [xtdb-path (-> conf :xtdb :dev :dir)
+        xtdb-port (-> conf :xtdb :dev :port)
+        ^Map m {:xtdb/tx-log              (kv-store (str xtdb-path "/tx-log"))
+                :xtdb/document-store      (kv-store (str xtdb-path "/doc-store"))
+                :xtdb/index-store         (kv-store (str xtdb-path "/index-store"))
+                ;; Configuring the Block Cache https://docs.xtdb.com/storage/1.20.0/rocksdb/
+                :xtdb.rocksdb/block-cache {:xtdb/module 'xtdb.rocksdb/->lru-block-cache
+                                           :cache-size  (* 512 1024 1024)}
+                ;; optional:
+                :xtdb.lucene/lucene-store {:db-dir (str xtdb-path "/lucene-dir")}
+                :xtdb.http-server/server  {:port xtdb-port}}]
+       m))
+
 (defn start-xtdb! [conf]
-  ^IXtdb (IXtdb/startNode
-           (let [xtdb-path (-> conf :xtdb :dev :dir)
-                 xtdb-port (-> conf :xtdb :dev :port)
-                 ^Map m {:xtdb/tx-log              (kv-store (str xtdb-path "/tx-log"))
-                         :xtdb/document-store      (kv-store (str xtdb-path "/doc-store"))
-                         :xtdb/index-store         (kv-store (str xtdb-path "/index-store"))
-                         ;; Configuring the Block Cache https://docs.xtdb.com/storage/1.20.0/rocksdb/
-                         :xtdb.rocksdb/block-cache {:xtdb/module 'xtdb.rocksdb/->lru-block-cache
-                                                    :cache-size  (* 512 1024 1024)}
-                         ;; optional:
-                         :xtdb.lucene/lucene-store {:db-dir (str xtdb-path "/lucene-dir")}
-                         :xtdb.http-server/server  {:port xtdb-port}}]
-             m)))
+  ^IXtdb (IXtdb/startNode (rocks-node-opts conf)))
 
 ; rocksdb bug https://www.tabnine.com/code/java/methods/org.rocksdb.RocksDB/close
 ; if that is fail, then full re-start needed ...

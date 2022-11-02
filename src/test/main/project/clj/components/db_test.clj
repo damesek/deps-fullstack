@@ -48,7 +48,7 @@
 
 
 ;; open temporary rocksdb and close after the test
-;; just example refactor for real tests
+;; just example refactor for real tests >> use fixtures temporary tests
 
 (deftest test-with-temporary-dir
            (with-tmp-dirs #{db-dir}
@@ -63,6 +63,19 @@
                                  (with-open [new-n (xt/start-node node-opts)]
                                             (xt/sync new-n)
                                             (is (= submitted-tx (xt/latest-completed-tx new-n)))))))
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
