@@ -11,7 +11,7 @@
 
 (def closed? (atom "false"))
 
-(def ^:dynamic ^IXtdb *xtdb*)
+(declare ^:dynamic ^IXtdb *xtdb*)
 
 ; todo fix env var reads, something bug here (with lein works..)
 
@@ -67,7 +67,7 @@
 ;;; ---- IXTDB resz vege
 
 (defn start-xtdb! [conf]
-      ;^IXtdb
+      ^IXtdb
       (xt/start-node (rocks-node-opts conf)))
 
 ; rocksdb bug https://www.tabnine.com/code/java/methods/org.rocksdb.RocksDB/close
@@ -86,7 +86,7 @@
                                   ;:rollback (start-xtdb! conf) ;; todo add rollback fn
                                   ;:migrate (start-xtdb! conf)  ;; todo add migrate fn
                                   :test (start-xtdb! test-db)
-                                  (start-xtdb! conf)))
+                                  (start-xtdb-IXtdb! conf)))
                 :stop (when (instance? java.io.Closeable *xtdb*)
                         ;(not (keyword? *xtdb*))
                             (try
