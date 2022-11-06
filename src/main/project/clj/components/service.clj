@@ -165,7 +165,7 @@
 
 (mount/defstate http-server
                 :start (http/start (http-server-service conf))
-                :stop (http/stop http-server))
+                :stop  (http/stop http-server))
 
 
 
