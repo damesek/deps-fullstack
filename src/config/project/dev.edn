@@ -1,4 +1,4 @@
-{:dev?   true
+{:dev?   false
  :server {:dev  {:io.pedestal.http/join?             false
                  :io.pedestal.http/port              3000
                  :io.pedestal.http/host              "0.0.0.0"
@@ -16,6 +16,7 @@
                  :io.pedestal.http/type              :jetty
 
                  ;; todo add prod things here
+                 :io.pedestal.http/secure-headers    {:content-security-policy-settings {:object-src "none"}}
                  :io.pedestal.http/container-options {:h2c? true
                                                       :h2?  false
                                                       :ssl? false}}}

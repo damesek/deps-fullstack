@@ -77,6 +77,19 @@ So, that is the "best practice" for using XTDB.
 Mac M1 issue: https://github.com/xtdb/xtdb/issues/1518
 `{org.rocksdb/rocksdbjni {:mvn/version "6.29.4.1"}}`
 
+### Uberdeps compile command
+
+Documentation in details: https://github.com/tonsky/uberdeps#no-config-setup
+
+```shell
+yarn
+npm run postcss:build 
+shadow-cljs release app
+./uberdeps/package.sh 
+java -cp target/project.jar clojure.main -m project.clj.server
+```
+
+
 ### Nix
 
 Just run `nix-shell` and the project dependencies are defined in `shell.nix`.
