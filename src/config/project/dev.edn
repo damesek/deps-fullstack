@@ -1,4 +1,4 @@
-{:dev?   false
+{:dev?   true
  :server {:dev  {:io.pedestal.http/join?             false
                  :io.pedestal.http/port              3000
                  :io.pedestal.http/host              "0.0.0.0"
